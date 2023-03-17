@@ -8,14 +8,104 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var tipPCt = 0
+    @State private var numPeople = 1
+    @State private var total = "0"
+
+    var canAddDecimal: Bool {
+        return total.filter({$0 == "."}).count == 0 ? true : false
+    }
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                Text(total)
+                    .font(.system(size: 70))
+                    .frame(width: 260, alignment: .trailing)
+                    .padding(.vertical, 1)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                HStack {
+                    ForEach(7...9, id: \.self) { number in
+                        numberButton("\(number)")
+                    }
+                }
+                HStack {
+                    ForEach(4...6, id: \.self) { number in
+                        numberButton("\(number)")
+                    }
+                }
+                HStack {
+                    ForEach(1...3, id: \.self) { number in
+                        numberButton("\(number)")
+                    }
+                }
+                HStack {
+                    numberButton("0")
+                    numberButton(".")
+                    Button {
+
+                    } label: {
+                        Image(systemName: "delete.backward.fill")
+                            .frame(width: 80, height: 80)
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .clipShape(Circle())
+                    }
+                }
+                HStack {
+                    Text("Tip")
+                    Picker(selection: $tipPCt, label: Text("Tip")) {
+                        ForEach(0...100, id: \.self) { tip in
+                            Text("\(tip)%")
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+
+                HStack {
+                    Text("Number of People")
+                    Picker(selection: $numPeople, label: Text("Number of People")) {
+                        ForEach(1...20, id: \.self) { tip in
+                            Text("\(tip)")
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+                HStack {
+                    Button("Calculate") {
+
+                    }
+                    Button("Clear") {
+
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+                .foregroundColor(.white)
+                Spacer()
+            }
+            .navigationTitle("Portion Calculator")
         }
-        .padding()
+    }
+
+    func addDigit(_ number: String) {
+        total = total == "0" ? number : total + number
+    }
+
+    func numberButton(_ number: String) -> some View {
+        Button {
+            addDigit(number)
+        }
+        label: {
+            Text(number)
+                .frame(width: 80, height: 80)
+                .font(.largeTitle)
+                .bold()
+                .background(.purple)
+                .foregroundColor(.white)
+                .clipShape(Circle())
+        }
     }
 }
 
