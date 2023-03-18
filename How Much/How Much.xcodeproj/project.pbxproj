@@ -11,6 +11,7 @@
 		419391C729A6B43100096037 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419391C629A6B43100096037 /* ContentView.swift */; };
 		419391C929A6B43300096037 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419391C829A6B43300096037 /* Assets.xcassets */; };
 		419391CC29A6B43300096037 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 419391CB29A6B43300096037 /* Preview Assets.xcassets */; };
+		41C3167429C55FB3000FBFFF /* TotalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C3167329C55FB3000FBFFF /* TotalsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		419391C629A6B43100096037 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		419391C829A6B43300096037 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		419391CB29A6B43300096037 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		41C3167329C55FB3000FBFFF /* TotalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				419391C629A6B43100096037 /* ContentView.swift */,
 				419391C829A6B43300096037 /* Assets.xcassets */,
 				419391CA29A6B43300096037 /* Preview Content */,
+				41C3167329C55FB3000FBFFF /* TotalsView.swift */,
 			);
 			path = "How Much";
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C3167429C55FB3000FBFFF /* TotalsView.swift in Sources */,
 				419391C729A6B43100096037 /* ContentView.swift in Sources */,
 				419391C529A6B43100096037 /* How_MuchApp.swift in Sources */,
 			);

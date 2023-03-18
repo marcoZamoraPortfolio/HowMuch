@@ -11,10 +11,21 @@ struct ContentView: View {
     @State private var tipPCt = 0
     @State private var numPeople = 1
     @State private var total = "0"
-
+    @State private var calculate = false
+    /// Checks to see if a decimal point can be added and that another doesn't already
+    /// exist
     var canAddDecimal: Bool {
         return total.filter({$0 == "."}).count == 0 ? true : false
     }
+    
+    /// Checks that a digit can be added after the decimal point. Limiting the amount
+    /// of digits to just 2 after decimal point
+    var canAddDigit: Bool {
+        guard let decIndex = total.firstIndex(of: ".") else { return true }
+        let index = total.distance(from: total.startIndex, to: decIndex)
+        return (total.count - index - 1) < 2
+    }
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -43,7 +54,11 @@ struct ContentView: View {
                     numberButton("0")
                     numberButton(".")
                     Button {
-
+                        if total.count == 1 {
+                            total = "0"
+                        } else {
+                            total.removeLast()
+                        }
                     } label: {
                         Image(systemName: "delete.backward.fill")
                             .frame(width: 80, height: 80)
@@ -54,6 +69,8 @@ struct ContentView: View {
                             .clipShape(Circle())
                     }
                 }
+                .padding(.bottom, 15)
+
                 HStack {
                     Text("Tip")
                     Picker(selection: $tipPCt, label: Text("Tip")) {
@@ -63,24 +80,29 @@ struct ContentView: View {
                     }
                     .buttonStyle(.bordered)
                 }
+                .padding(.bottom, 15)
 
                 HStack {
-                    Text("Number of People")
-                    Picker(selection: $numPeople, label: Text("Number of People")) {
+                    Text("Number of people")
+                    Picker(selection: $numPeople, label: Text("Number of people")) {
                         ForEach(1...20, id: \.self) { tip in
                             Text("\(tip)")
                         }
                     }
                     .buttonStyle(.bordered)
                 }
+                .padding(.bottom, 15)
+
                 HStack {
                     Button("Calculate") {
-
+                        calculate = true
                     }
+                    .padding(.trailing, 15)
                     Button("Clear") {
-
+                        total = "0"
                     }
                 }
+                .disabled(Double(total) == 0)
                 .buttonStyle(.borderedProminent)
                 .foregroundColor(.white)
                 Spacer()
@@ -90,7 +112,13 @@ struct ContentView: View {
     }
 
     func addDigit(_ number: String) {
-        total = total == "0" ? number : total + number
+        if canAddDigit {
+            if number == "." && canAddDecimal {
+                total += number
+            } else {
+                total = total == "0" ? number : total + number
+            }
+        }
     }
 
     func numberButton(_ number: String) -> some View {
